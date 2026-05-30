@@ -2245,20 +2245,42 @@ section {
     
 <script>
 
+const music =
+document.getElementById('backgroundMusic');
+
+const musicBtn =
+document.querySelector('.music-btn');
+
 const openBtn =
 document.querySelector('.open-invitation');
 
-const cover =
-document.querySelector('.cover');
-
-const mainContent =
-document.querySelector('.main-content');
+/* PLAY SAAT BUKA UNDANGAN */
 
 openBtn.addEventListener('click', () => {
 
-    cover.style.display = 'none';
+    music.play();
 
-    mainContent.classList.add('show');
+    musicBtn.classList.add('playing');
+
+});
+
+/* TOGGLE MUSIC */
+
+musicBtn.addEventListener('click', () => {
+
+    if (music.paused) {
+
+        music.play();
+
+        musicBtn.classList.add('playing');
+
+    } else {
+
+        music.pause();
+
+        musicBtn.classList.remove('playing');
+
+    }
 
 });
 
@@ -2466,44 +2488,7 @@ document
 
 });
 
-    const music =
-document.getElementById('backgroundMusic');
-
-const musicBtn =
-document.querySelector('.music-btn');
-
-const openBtn =
-document.querySelector('.open-invitation');
-
-/* PLAY SAAT BUKA UNDANGAN */
-
-openBtn.addEventListener('click', () => {
-
-    music.play();
-
-    musicBtn.classList.add('playing');
-
-});
-
-/* TOGGLE MUSIC */
-
-musicBtn.addEventListener('click', () => {
-
-    if (music.paused) {
-
-        music.play();
-
-        musicBtn.classList.add('playing');
-
-    } else {
-
-        music.pause();
-
-        musicBtn.classList.remove('playing');
-
-    }
-
-});
+    
 </script>
 </body>
 
