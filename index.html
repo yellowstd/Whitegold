@@ -2446,63 +2446,33 @@ section {
    OPEN INVITATION
 ========================= */
 
-const openBtn =
-document.querySelector('.open-invitation');
+openBtn.addEventListener('click', () => {
 
-const cover =
-document.querySelector('.cover');
+    document.body.classList.remove('lock-scroll');
 
-const mainContent =
-document.querySelector('.main-content');
+    cover.classList.add('hide');
 
-const music =
-document.getElementById('backgroundMusic');
+    if (music) {
 
-const musicBtn =
-document.querySelector('.music-btn');
+        music.play().catch(() => {});
 
-if (openBtn) {
+    }
 
-    openBtn.addEventListener('click', () => {
+    if (musicBtn) {
 
-        /* aktifkan scroll */
+        musicBtn.classList.add('playing');
 
-        document.body.classList.remove('lock-scroll');
+    }
 
-        /* buka isi undangan */
+    setTimeout(() => {
 
         cover.style.display = 'none';
 
         mainContent.classList.add('show');
 
-        /* play musik */
+    }, 800);
 
-        if (music) {
-
-            music.play().catch(() => {});
-
-        }
-
-        /* tombol musik */
-
-        if (musicBtn) {
-
-            musicBtn.classList.add('playing');
-
-        }
-
-    });
-
-}
-
-cover.style.display = 'none';
-    cover.classList.add('hide');
-
-setTimeout(() => {
-
-    cover.style.display = 'none';
-
-}, 800);
+});
     
 /* =========================
    TOGGLE MUSIC
