@@ -19,7 +19,18 @@
 body {
     overflow-x: hidden;
 }
-* {
+body.lock-scroll{
+    overflow:hidden;
+    height:100vh;
+}
+
+.main-content{
+    display:none;
+}
+
+.main-content.show{
+    display:block;
+}
     
  /* RESET */
 
@@ -1711,7 +1722,6 @@ section {
 }
 
 </style>
-<body>
 <body class="lock-scroll">
     <!-- COVER -->
     <section class="cover">
@@ -2420,10 +2430,6 @@ section {
 
 </audio>
 
-<audio id="backgroundMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
-
 <button class="music-btn">
     <i class="fa-solid fa-music"></i>
 </button>
@@ -2433,26 +2439,65 @@ section {
    OPEN INVITATION
 ========================= */
 
-openBtn.addEventListener('click', () => {
+const openBtn =
+document.querySelector('.open-invitation');
 
-    document.body.classList.remove('lock-scroll');
+const cover =
+document.querySelector('.cover');
 
-    cover.classList.add('hide');
+const mainContent =
+document.querySelector('.main-content');
 
-    if (music) {
+const music =
+document.getElementById('backgroundMusic');
 
-        music.play().catch(() => {});
+const musicBtn =
+document.querySelector('.music-btn');
 
-    }
+/* Pastikan isi undangan tersembunyi saat pertama kali */
 
-    if (musicBtn) {
+if (mainContent) {
+    mainContent.classList.remove('show');
+}
 
-        musicBtn.classList.add('playing');
+/* Klik tombol buka undangan */
 
-    }
+if (openBtn) {
 
-});
-    
+    openBtn.addEventListener('click', () => {
+
+        /* aktifkan scroll */
+
+        document.body.classList.remove('lock-scroll');
+
+        /* sembunyikan cover */
+
+        if (cover) {
+            cover.style.display = 'none';
+        }
+
+        /* tampilkan isi undangan */
+
+        if (mainContent) {
+            mainContent.classList.add('show');
+        }
+
+        /* putar musik */
+
+        if (music) {
+            music.play().catch(() => {});
+        }
+
+        /* animasi tombol musik */
+
+        if (musicBtn) {
+            musicBtn.classList.add('playing');
+        }
+
+    });
+
+}
+
 /* =========================
    TOGGLE MUSIC
 ========================= */
@@ -2478,6 +2523,7 @@ if (musicBtn && music) {
     });
 
 }
+
 
 const reveals = document.querySelectorAll(`
 .reveal-up,
