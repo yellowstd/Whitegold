@@ -19,7 +19,9 @@
 body {
     overflow-x: hidden;
 }
-
+* {
+    box-sizing: border-box;
+}
  /* RESET */
 
 * {
@@ -35,21 +37,29 @@ body {
     overflow-x: hidden;
 }
 
-/* COVER */
+/* =========================
+   COVER
+========================= */
 
-.cover {
-    min-height: 100vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 40px 20px;
+.cover{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:#f8f6f2;
+    padding:40px 20px;
 }
 
-.cover-content {
-    max-width: 600px;
-    z-index: 2;
+.cover-content{
+    position:relative;
+    z-index:4;
+
+    width:80%;
+    max-width:420px;
+
+    text-align:center;
 }
 
 
@@ -118,6 +128,57 @@ body {
 
 .main-content.show {
     display: block;
+}
+
+.cover-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:1;
+    opacity:.65;
+}
+
+.cover-frame{
+    position:absolute;
+    width:min(95vw,700px);
+    z-index:2;
+
+    filter:
+    drop-shadow(
+        0 15px 40px rgba(0,0,0,.08)
+    );
+
+    animation:
+    frameFloat 8s ease-in-out infinite;
+}
+
+.cover-flower{
+    position:absolute;
+
+    width:min(65vw,420px);
+
+    right:-80px;
+    top:-40px;
+
+    z-index:3;
+
+    opacity:.95;
+}
+
+@keyframes frameFloat{
+
+    0%,100%{
+        transform:
+        translateY(0);
+    }
+
+    50%{
+        transform:
+        translateY(-8px);
+    }
+
 }
 
   /* =========================
@@ -299,11 +360,11 @@ body {
     }
 
     .reveal-left {
-        transform: translateX(-40px);
+        transform: translateX(-20px);
     }
 
     .reveal-right {
-        transform: translateX(40px);
+        transform: translateX(20px);
     }
 
 }
@@ -1481,7 +1542,7 @@ section {
     color: #888;
 }
 
-    /* =========================
+/* =========================
    MUSIC BUTTON
 ========================= */
 
@@ -1543,7 +1604,17 @@ section {
 
     <!-- COVER -->
     <section class="cover">
+    <div><img src="watercolor-bg.png"
+     class="cover-bg"
+     alt="">
 
+<img src="frame.png"
+     class="cover-frame"
+     alt="">
+
+<img src="flower-corner.png"
+     class="cover-flower"
+     alt=""></div>
         <div class="cover-overlay"></div>
 
         <div class="cover-content">
@@ -1585,7 +1656,11 @@ section {
    <!-- OPENING -->
 
 <section class="opening">
+  <div>
+<img src="ornament-top.png" class="opening-ornament top" alt="">
+        <img src="ornament-bottom.png" class="opening-ornament bottom" alt="">
 
+    </div>
     <div class="container">
 
         <div class="opening-content">
@@ -1611,11 +1686,6 @@ section {
             </span>
 
         </div>
-
-        <img src="ornament-top.png" class="opening-ornament top" alt="">
-        <img src="ornament-bottom.png" class="opening-ornament bottom" alt="">
-
-    </div>
 
 </section>
    
@@ -2232,18 +2302,34 @@ section {
     </p>
 
 </footer>
-    <button class="music-btn">
 
-    <i class="fa-solid fa-music"></i>
-
-    </button>
 <audio id="backgroundMusic" loop>
 
     <source src="backsound.mp3" type="audio/mpeg">
 
 </audio>
-    
+
+<audio id="backgroundMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn">
+    <i class="fa-solid fa-music"></i>
+</button>
 <script>
+
+/* =========================
+   OPEN INVITATION
+========================= */
+
+const openBtn =
+document.querySelector('.open-invitation');
+
+const cover =
+document.querySelector('.cover');
+
+const mainContent =
+document.querySelector('.main-content');
 
 const music =
 document.getElementById('backgroundMusic');
@@ -2251,38 +2337,61 @@ document.getElementById('backgroundMusic');
 const musicBtn =
 document.querySelector('.music-btn');
 
-const openBtn =
-document.querySelector('.open-invitation');
+if (openBtn) {
 
-/* PLAY SAAT BUKA UNDANGAN */
+    openBtn.addEventListener('click', () => {
 
-openBtn.addEventListener('click', () => {
+        /* buka isi undangan */
 
-    music.play();
+        cover.style.display = 'none';
 
-    musicBtn.classList.add('playing');
+        mainContent.classList.add('show');
 
-});
+        /* play musik */
 
-/* TOGGLE MUSIC */
+        if (music) {
 
-musicBtn.addEventListener('click', () => {
+            music.play().catch(() => {});
 
-    if (music.paused) {
+        }
 
-        music.play();
+        /* animasi tombol musik */
 
-        musicBtn.classList.add('playing');
+        if (musicBtn) {
 
-    } else {
+            musicBtn.classList.add('playing');
 
-        music.pause();
+        }
 
-        musicBtn.classList.remove('playing');
+    });
 
-    }
+}
 
-});
+/* =========================
+   TOGGLE MUSIC
+========================= */
+
+if (musicBtn && music) {
+
+    musicBtn.addEventListener('click', () => {
+
+        if (music.paused) {
+
+            music.play();
+
+            musicBtn.classList.add('playing');
+
+        } else {
+
+            music.pause();
+
+            musicBtn.classList.remove('playing');
+
+        }
+
+    });
+
+}
 
 const reveals = document.querySelectorAll(`
 .reveal-up,
@@ -2487,8 +2596,6 @@ document
     });
 
 });
-
-    
 </script>
 </body>
 
