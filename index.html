@@ -44,20 +44,22 @@ body {
 .cover{
     position:relative;
     min-height:100vh;
+    overflow:hidden;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden;
-    background:#f8f6f2;
-    padding:40px 20px;
 }
 
 .cover-content{
-    position:relative;
-    z-index:4;
 
-    width:80%;
-    max-width:420px;
+    position:relative;
+
+    z-index:3;
+
+    width:75%;
+
+    max-width:380px;
 
     text-align:center;
 }
@@ -133,25 +135,28 @@ body {
 .cover-bg{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
+
     object-fit:cover;
+
     z-index:1;
-    opacity:.65;
 }
 
 .cover-frame{
+
     position:absolute;
-    width:min(95vw,700px);
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    width:min(92vw,650px);
+
     z-index:2;
-
-    filter:
-    drop-shadow(
-        0 15px 40px rgba(0,0,0,.08)
-    );
-
-    animation:
-    frameFloat 8s ease-in-out infinite;
 }
 
 .cover-flower{
@@ -167,6 +172,50 @@ body {
     opacity:.95;
 }
 
+.cover::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-30px;
+    right:-30px;
+
+    width:220px;
+    height:220px;
+
+    background:
+    url("flower-corner.png")
+    no-repeat center;
+
+    background-size:contain;
+
+    z-index:3;
+}
+
+    .cover::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-30px;
+    bottom:-30px;
+
+    width:220px;
+    height:220px;
+
+    background:
+    url("flower-corner.png")
+    no-repeat center;
+
+    background-size:contain;
+
+    transform:rotate(180deg);
+
+    z-index:3;
+    }
+    
 @keyframes frameFloat{
 
     0%,100%{
@@ -1604,21 +1653,15 @@ section {
 
     <!-- COVER -->
     <section class="cover">
-    <div><img src="watercolor-bg.png"
-     class="cover-bg"
-     alt="">
+    <img src="watercolor-bg.png"
+         class="cover-bg"
+         alt="">
 
-<img src="frame.png"
-     class="cover-frame"
-     alt="">
+    <img src="frame.png"
+         class="cover-frame"
+         alt="">
 
-<img src="flower-corner.png"
-     class="cover-flower"
-     alt=""></div>
-        <div class="cover-overlay"></div>
-
-        <div class="cover-content">
-
+    <div class="cover-content">
             <p class="cover-subtitle">
                 THE WEDDING OF
             </p>
@@ -1656,7 +1699,6 @@ section {
    <!-- OPENING -->
 
 <section class="opening">
-  <div>
 <img src="ornament-top.png" class="opening-ornament top" alt="">
         <img src="ornament-bottom.png" class="opening-ornament bottom" alt="">
 
