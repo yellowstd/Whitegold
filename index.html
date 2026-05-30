@@ -157,79 +157,94 @@ body {
     width:min(92vw,650px);
 
     z-index:2;
+    animation:
+    frameFloat 8s ease-in-out infinite;
+}
 }
 
-.cover-flower{
+.flower-top{
     position:absolute;
 
-    width:min(65vw,420px);
-
+    top:-50px;
     right:-80px;
-    top:-40px;
+
+    width:380px;
 
     z-index:3;
 
     opacity:.95;
 }
 
-.cover::before{
-
-    content:"";
-
+.flower-bottom{
     position:absolute;
 
-    top:-30px;
-    right:-30px;
+    bottom:-50px;
+    left:-80px;
 
-    width:220px;
-    height:220px;
-
-    background:
-    url("flower-corner.png")
-    no-repeat center;
-
-    background-size:contain;
+    width:380px;
 
     z-index:3;
+
+    opacity:.95;
+
+    transform:
+    rotate(180deg);
+}
+    .flower-top{
+
+    animation:
+    flowerMove 6s ease-in-out infinite;
 }
 
-    .cover::after{
+.flower-bottom{
 
-    content:"";
-
-    position:absolute;
-
-    left:-30px;
-    bottom:-30px;
-
-    width:220px;
-    height:220px;
-
-    background:
-    url("flower-corner2.png")
-    no-repeat center;
-
-    background-size:contain;
-
-    transform:rotate(180deg);
-
-    z-index:3;
-    }
+    animation:
+    flowerMove 6s ease-in-out infinite reverse;
+}
     
+    @keyframes bgMove{
+
+    0%{
+        transform:
+        scale(1)
+        translate(0,0);
+    }
+
+    100%{
+        transform:
+        scale(1.08)
+        translate(-20px,-10px);
+    }
+
+    }
+
 @keyframes frameFloat{
 
     0%,100%{
         transform:
-        translateY(0);
+        translate(-50%,-50%);
     }
 
     50%{
         transform:
-        translateY(-8px);
+        translate(-50%,-53%);
     }
 
 }
+@keyframes flowerMove{
 
+    0%,100%{
+        transform:
+        rotate(0deg);
+    }
+
+    50%{
+        transform:
+        rotate(2deg);
+    }
+
+}
+    
   /* =========================
    REVEAL ANIMATION SYSTEM
 ========================= */
@@ -1660,6 +1675,13 @@ section {
     <img src="frame.png"
          class="cover-frame"
          alt="">
+    <img src="flower-corner.png"
+     class="flower-top"
+     alt="">
+
+<img src="flower-corner.png"
+     class="flower-bottom"
+     alt="">
 
     <div class="cover-content">
             <p class="cover-subtitle">
