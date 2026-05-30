@@ -546,23 +546,45 @@ section {
     z-index: 1;
 }
 
-/* Top Ornament */
+/* FLOWER TOP */
 
-.opening-ornament.top {
-    top: 0;
-    left: 0;
-    width: 250px;
-    animation: floatTop 8s ease-in-out infinite;
+.flower-top{
+
+    position:absolute;
+
+    top:-40px;
+
+    right:-40px;
+
+    width:260px;
+
+    z-index:3;
+
+    opacity:.95;
+
+    pointer-events:none;
 }
 
-/* Bottom Ornament */
 
-.opening-ornament.bottom {
-    right: 0;
-    bottom: 0;
-    width: 250px;
-    transform: rotate(180deg);
-    animation: floatBottom 8s ease-in-out infinite;
+/* FLOWER BOTTOM */
+
+.flower-bottom{
+
+    position:absolute;
+
+    bottom:-70px;
+
+    left:-50px;
+
+    width:260px;
+
+    z-index:3;
+
+    opacity:.95;
+
+    transform:rotate(180deg);
+
+    pointer-events:none;
 }
 
 /* =========================
