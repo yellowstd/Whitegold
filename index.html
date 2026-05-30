@@ -1481,6 +1481,63 @@ section {
     color: #888;
 }
 
+    /* =========================
+   MUSIC BUTTON
+========================= */
+
+.music-btn {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #c6a972;
+
+    color: white;
+
+    cursor: pointer;
+
+    z-index: 999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
+}
+
+.music-btn i {
+    font-size: 18px;
+}
+
+.music-btn.playing {
+
+    animation:
+        rotateMusic 4s linear infinite;
+}
+
+@keyframes rotateMusic {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
 </style>
 <body>
 
@@ -2175,6 +2232,17 @@ section {
     </p>
 
 </footer>
+    <button class="music-btn">
+
+    <i class="fa-solid fa-music"></i>
+
+    </button>
+<audio id="backgroundMusic" loop>
+
+    <source src="backsound.mp3" type="audio/mpeg">
+
+</audio>
+    
 <script>
 
 const openBtn =
@@ -2395,6 +2463,45 @@ document
         }, 2000);
 
     });
+
+});
+
+    const music =
+document.getElementById('backgroundMusic');
+
+const musicBtn =
+document.querySelector('.music-btn');
+
+const openBtn =
+document.querySelector('.open-invitation');
+
+/* PLAY SAAT BUKA UNDANGAN */
+
+openBtn.addEventListener('click', () => {
+
+    music.play();
+
+    musicBtn.classList.add('playing');
+
+});
+
+/* TOGGLE MUSIC */
+
+musicBtn.addEventListener('click', () => {
+
+    if (music.paused) {
+
+        music.play();
+
+        musicBtn.classList.add('playing');
+
+    } else {
+
+        music.pause();
+
+        musicBtn.classList.remove('playing');
+
+    }
 
 });
 </script>
