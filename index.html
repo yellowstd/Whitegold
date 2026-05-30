@@ -22,6 +22,19 @@ body {
 * {
     box-sizing: border-box;
 }
+    body.lock-scroll{
+    overflow:hidden;
+    height:100vh;
+    }
+
+    .cover.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.8s ease;
+    }
  /* RESET */
 
 * {
@@ -1713,7 +1726,7 @@ section {
 
 </style>
 <body>
-
+<body class="lock-scroll">
     <!-- COVER -->
     <section class="cover">
     <img src="watercolor-bg.png"
@@ -2453,6 +2466,10 @@ if (openBtn) {
 
     openBtn.addEventListener('click', () => {
 
+        /* aktifkan scroll */
+
+        document.body.classList.remove('lock-scroll');
+
         /* buka isi undangan */
 
         cover.style.display = 'none';
@@ -2467,7 +2484,7 @@ if (openBtn) {
 
         }
 
-        /* animasi tombol musik */
+        /* tombol musik */
 
         if (musicBtn) {
 
@@ -2479,6 +2496,15 @@ if (openBtn) {
 
 }
 
+cover.style.display = 'none';
+    cover.classList.add('hide');
+
+setTimeout(() => {
+
+    cover.style.display = 'none';
+
+}, 800);
+    
 /* =========================
    TOGGLE MUSIC
 ========================= */
